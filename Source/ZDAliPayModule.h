@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <WXModuleProtocol.h>
 
-#define kAliPayScheme @"sendAliPayRequest"
-
 @interface ZDAliPayModule : NSObject<WXModuleProtocol>
 
 @end

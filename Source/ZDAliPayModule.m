@@ -9,6 +9,8 @@
 #import <WeexPluginLoader/WeexPluginLoader.h>
 #import <AlipaySDK/AlipaySDK.h>
 
+#define kAliPayScheme @"sendAliPayRequestDemo"
+
 WX_PlUGIN_EXPORT_MODULE(bmAliPay, ZDAliPayModule)
 
 @implementation ZDAliPayModule
@@ -18,15 +20,25 @@ WX_EXPORT_METHOD(@selector(pay:callback:))
 /**
  支付宝支付
 
- @param params 参数 {@"authInfo": @"服务器签名后的订单数据"}
+ @param params 参数 {@"authInfo": @"服务器签名后的订单数据", @"scheme": @"用户自定义的scheme"}
  @param callback 回调
  */
 - (void)pay:(NSDictionary *)params callback:(WXModuleCallback)callback {
-    NSString *orderString =[params objectForKey:@"authInfo"];
+    NSString *orderString = [params objectForKey:@"authInfo"];
     
-    [[AlipaySDK defaultService] payOrder:orderString fromScheme:kAliPayScheme callback:^(NSDictionary *resultDic) {
+    NSString *scheme = [params objectForKey:@"scheme"];
+    
+    if (!scheme) {
+        scheme = kAliPayScheme;
+    }
+    
+    [[AlipaySDK defaultService] payOrder:orderString fromScheme:scheme callback:^(NSDictionary *resultDic) {
         if (callback) {
-            callback(resultDic);
+            callback(@{
+                       @"status": resultDic[@"resultStatus"],
+                       @"errorMsg": resultDic[@"memo"],
+                       @"data": resultDic[@"result"]
+                       });
         }
     }];
 }
