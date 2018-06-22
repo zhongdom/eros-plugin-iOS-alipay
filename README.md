@@ -4,7 +4,7 @@
 ## 集成
 - 在iOS项目文件夹的`Podfile`中添加以下代码，然后执行 `pod update`
 ```
-pod 'eros-plugin-iOS-alipay', :git => 'https://github.com/zhongdom/eros-plugin-iOS-alipay.git', :tag => '0.0.2'
+pod 'eros-plugin-iOS-alipay', :git => 'https://github.com/zhongdom/eros-plugin-iOS-alipay.git', :tag => '0.0.3'
 ```
 
 - 在项目设置`TARGEI->Info->URL Types` 增加一个 `scheme`，`URL Schemes`中填写自定义的scheme值（默认值为`sendAliPayRequestDemo`，此字段要求唯一，建议自定义，否则支付回调可能不正常），`Identifier`中随便填写一个字符串
@@ -40,3 +40,9 @@ bmAliPay.pay({
     console.log("支付返回数据："+JSON.stringify(resData)); // 具体返回值参考 eros-plugin-android-alipay
 }) 
 ```
+
+## 更新日志
+
+0.0.3 
+
+* bugfix;
