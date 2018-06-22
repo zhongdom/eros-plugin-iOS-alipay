@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "eros-plugin-iOS-alipay"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "适用于weex的支付宝支付插件."
   s.homepage     = "https://github.com/zhongdom"
   s.license      = "MIT"
@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/zhongdom/eros-plugin-iOS-alipay.git", :tag => s.version.to_s }
   s.source_files  = "Source/*.{h,m,mm}"
   s.requires_arc = true 
-  s.dependency "YLAlipaySDK", "~> 15.5.5"
+  s.dependency "YLAlipaySDK", "15.5.5"
 
 end

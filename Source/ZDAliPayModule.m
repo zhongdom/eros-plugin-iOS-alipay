@@ -6,9 +6,8 @@
 //
 
 #import "ZDAliPayModule.h"
-#import <WeexPluginLoader/WeexPluginLoader.h>
-#import <AlipaySDK/AlipaySDK.h>
-
+#import <WeexPluginLoader/WeexPluginLoader/WeexPluginLoader.h>
+#import "HYAliPayManager.h"
 #define kAliPayScheme @"sendAliPayRequestDemo"
 
 WX_PlUGIN_EXPORT_MODULE(bmAliPay, ZDAliPayModule)
@@ -32,15 +31,7 @@ WX_EXPORT_METHOD(@selector(pay:callback:))
         scheme = kAliPayScheme;
     }
     
-    [[AlipaySDK defaultService] payOrder:orderString fromScheme:scheme callback:^(NSDictionary *resultDic) {
-        if (callback) {
-            callback(@{
-                       @"status": resultDic[@"resultStatus"],
-                       @"errorMsg": resultDic[@"memo"],
-                       @"data": resultDic[@"result"]
-                       });
-        }
-    }];
+    [HYAliPayManager payWithOrderInfo:orderString fromScheme:scheme callback:callback];
 }
 
 @end
